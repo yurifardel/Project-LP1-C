@@ -5,6 +5,8 @@
 #include <ctype.h>
 #define NUM_ALUNO 20
 
+
+// VARIAVEIS DO SISTEMA
 typedef struct dados_cerimonia {
     char dataevento[15];
     char  horarioevento[200];
@@ -46,14 +48,19 @@ void Coordenador_Confirma();
 void cerimonia_cerimonialista();
 void cerimonia_aluno();
 void coordenador_novachance();
+
+// FUNÇÃO PRINCIPAL
 int main(){
 
     setlocale(LC_ALL, "Portuguese");
 
+    // chama a função
     home();
     return 0;
 }
 
+
+// MENU DO SISTEMA
 void home(){
     int opcao;
 
@@ -91,6 +98,7 @@ void home(){
     }while(opcao <= 5);
 }
 
+// inicia o sistema
 void inicializar(){
 
     for (i=0; i<1 ;i++) {
@@ -100,6 +108,7 @@ void inicializar(){
     }
 }
 
+// FUNÇÃO ALUNO
 void cadastrarAluno(){
     system("cls");
     char nome[200];
@@ -108,6 +117,8 @@ void cadastrarAluno(){
     int id;
     char confirA[2];
     int opc;
+
+        // menu do aluno
         do {
             printf("\n***** Bem-Vindo *****\n");
             printf("\n1- Protocolar colação\n");
@@ -237,9 +248,13 @@ void cadastrarAluno(){
         }while (opc!=3);
 }
 
+
+// FUNÇÃO DO COORDENADOR
 void Coordenador(){
     system("cls");
     int opc;
+
+    // arrays
     char nome_tcc[11][2][200];
     int matriculaC[11][2];
     char escolhaC[2];
@@ -279,6 +294,8 @@ void Coordenador(){
        system("cls");
        printf("***** Gerar relatório *****\n");
         printf("Digite o nome dos alunos defenderam o TCC nesse semestre. Você tem o limite de 10 nomes.");
+        
+        // cria um arquivo externo do tipo texto 
         FILE *arquivo_exter;
         arquivo_exter=fopen("alunostcc.txt","a");
         for (i=1; i < 11; i++){
@@ -290,6 +307,8 @@ void Coordenador(){
                 scanf("%d",&matriculaC[i][j]);
             }
         }
+
+        // arquivo externo
         fprintf(arquivo_exter,"Lista de Alunos:\n");
         for (i=1; i < 11; i++) {
             printf("\n");
@@ -297,6 +316,7 @@ void Coordenador(){
                 fprintf(arquivo_exter,"%d- Nome:%s - Matricula:%d\n",i,nome_tcc[i][j],matriculaC[i][j]);
             }
         }
+        // fecha o arquivo
         fclose(arquivo_exter);
         printf("Lista gerada com sucesso.");
         break;
@@ -387,6 +407,8 @@ void Coordenador(){
         }
    } while (opc!=4);
 }
+
+// FUNÇÃO DO COORDENADOR 1
 void Coordenador1(){
     system("cls");
     int opc;
@@ -444,6 +466,8 @@ void Coordenador1(){
         for (i= 1; i < 11; i++) {
             printf("\n");
             for (j=1;j< 2;j++){
+
+                // armazena os arrays no arquivo 
                 fprintf(arquivo_exter,"%d- Nome: %s - Matricula: %d\n",i,nome_tcc1[i][j],matriculaC1[i][j]);
             }
         }
@@ -537,6 +561,8 @@ void Coordenador1(){
    } while (opc!=4);
 
 }
+
+// FUNÇÃO DO CERIMONIALISTA
 void Cerimonialista(){
     system("cls");
     char localEvento[200];
@@ -577,6 +603,7 @@ void Cerimonialista(){
             fgets(nameApresent,sizeof(nameApresent),stdin);
             for (i=0; i < 3; ++i) {
                    if (cerimonia[tipodecerimonia].verificacaoC==0) {
+                       // inicializando as variaveis
                         strcpy(cerimonia[tipodecerimonia].localEvento,localEvento);
                         strcpy(cerimonia[tipodecerimonia].dataevento,dataevento);
                         strcpy(cerimonia[tipodecerimonia].horarioevento,horarioevento);
@@ -644,6 +671,8 @@ void Cerimonialista(){
         }
     }while(opc != 4);
 }
+
+// DADOS DO ALUNO
 void Dados(){
         printf("\nNome: %s", vasr_system[i].nome);
         printf("\nMatricula: %d\n", vasr_system[i].matricula);
@@ -651,6 +680,8 @@ void Dados(){
         printf("\nCurso: %s\n", vasr_system[i].curso);
         printf("\n------------------------------------------------");
 }
+
+// ANALISE DO COORDENADOR
 void Coordenador_Confirma() {
         for ( i=0 ; i <= NUM_ALUNO ; ++i){
 
@@ -684,6 +715,8 @@ void Coordenador_Confirma() {
         }
         }
 }
+
+// DADOS DA CERIMONIA
 void cerimonia_cerimonialista (int tipo){
         printf("\n Local do evento: %s", cerimonia[tipo].localEvento);
         printf("\n Data do evento: %s", cerimonia[tipo].dataevento );
@@ -698,6 +731,8 @@ void cerimonia_cerimonialista (int tipo){
         }
 
 }
+
+// DADOS DO EVENTO
 void cerimonia_aluno (int tipo) {
         printf("\n Local do evento: %s", cerimonia[tipo].localEvento);
         printf("\n Data do evento: %s", cerimonia[tipo].dataevento );
@@ -706,4 +741,3 @@ void cerimonia_aluno (int tipo) {
         printf("\n Tipo de cerimonia cadastrada: %d",cerimonia[tipo].tipodecerimonia );
         printf("\n\n------------------------------------------------");
 }
-
