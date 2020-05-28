@@ -54,7 +54,7 @@ int main(){
 
     setlocale(LC_ALL, "Portuguese");
 
-    // chama a função
+   
     home();
     return 0;
 }
@@ -175,49 +175,55 @@ void cadastrarAluno(){
                         fflush(stdin);
                         fgets(busca,sizeof(busca),stdin);
                         fflush(stdin);
-                        for ( i=0; i <=NUM_ALUNO ; ++i) {
-                            if ((strcmp(vasr_system[i].nome,busca)==0) && vasr_system[i].aluno==2 && cerimonia[vasr_system[i].id].verificacaoC==1) {
-                            Dados();
-                            printf("\nEssa são as informação da sua colação");
-                            cerimonia_aluno(vasr_system[i].id);
-                            printf("\nConfirma sua presença na cerimonia[s/n]?");
-                            printf("\nPor algum caso o aluno não possa estar presente deve confirmar sua presença e entregar a procuração na coordenação do curso.");
-                            printf("\nCaso não confirme sua presença ficará na lista do coordenador de até que outra cerimonia se compatível com sua ID: ");
-                            fflush(stdin);
-                            fgets(confirA,sizeof(confirA),stdin);
-                            if ((strcmp(confirA,"s")==0)){
-                                if (vasr_system[i].id==1 && total<=10){
-                                quantA[i]+=1;
-                                total+=quantA[i];
-                                vasr_system[i].aluno=3;
-                                printf("\n\nPresença confirmada!");
-                                printf("\n\n----------------------------------------------");
+
+                        
+
+                            for ( i=0; i <=NUM_ALUNO ; ++i) {
+                                if ((strcmp(vasr_system[i].nome,busca)==0)) {
+                                Dados();
+                                printf("\nEssa são as informação da sua colação");
+                                cerimonia_aluno(vasr_system[i].id);
+                                printf("\nConfirma sua presença na cerimonia[s/n]?");
+                                printf("\nPor acaso o aluno não possa estar presente deve confirmar sua presença e entregar a procuração na coordenação do curso.");
+                                printf("\nCaso não confirme sua presença ficará na lista do coordenador de até que outra cerimonia se compatível com sua ID: ");
+                                fflush(stdin);
+                                fgets(confirA,sizeof(confirA),stdin);
+                                if ((strcmp(confirA,"s")==0)){
+                                    if (vasr_system[i].id==1 && total<=10){
+                                        quantA[i]+=1;
+                                        total+=quantA[i];
+                                        vasr_system[i].aluno=3;
+                                        printf("\n\nPresença confirmada!");
+                                        printf("\n\n----------------------------------------------");
+                                }
+                                else if (vasr_system[i].id==2 && total1<=10){
+                                    quantA1[i]+=1;
+                                    total1+=quantA1[i];
+                                    vasr_system[i].aluno=3;
+                                    printf("\n\nPresença confirmada!");
+                                    printf("\n\n----------------------------------------------");
+                                }
+                                else  {
+                                    printf("Limite de vagas excedido");
+                                    printf("Você está na lista dos  seu coordenador e será cadastradado por ele na próxima cerimônia que for compátivel com sua ID. Será necessário que o aluno confirme sua presença.");
+                                    printf("\n\n------------------------------------------------");
+                                    vasr_system[i].aluno=-4;
+                                }
                             }
-                            else if (vasr_system[i].id==2 && total1<=10){
-                                quantA1[i]+=1;
-                                total1+=quantA1[i];
-                                vasr_system[i].aluno=3;
-                                printf("\n\nPresença confirmada!");
-                                printf("\n\n----------------------------------------------");
-                            }
-                            else  {
-                                printf("Limite de vagas excedido");
-                                printf("Você está na lista dos  seu coordenador e será cadastradado por ele na próxima cerimônia que for compátivel com sua ID. Será necessário que o aluno confirme sua presença.");
+                            else if (strcmp(vasr_system[i].nome,busca)==0 && strcmp(confirA,"n")==0 ){
+                                printf("\n\nO aluno marcou que não irá a cerimonia marcada.\nLogo, o aluno entra na lista do seu coordenador e será cadastradado por ele na próxima cerimônia que for compátivel com sua ID.\nSerá necessário que o aluno confirme sua presença.");
                                 printf("\n\n------------------------------------------------");
                                 vasr_system[i].aluno=-4;
                             }
-                        }
-                        else if (strcmp(vasr_system[i].nome,busca)==0 && strcmp(confirA,"n")==0 ){
-                            printf("\n\nO aluno marcou que não irá a cerimonia marcada.\nLogo, o aluno entra na lista do seu coordenador e será cadastradado por ele na próxima cerimônia que for compátivel com sua ID.\nSerá necessário que o aluno confirme sua presença.");
+                            }
+                            else if (vasr_system[i].aluno==-1 && strcmp(vasr_system[i].nome,busca)==0){
+                            printf("\n\n Aluno com pedências. Procure coordenador do seu curso");
                             printf("\n\n------------------------------------------------");
-                            vasr_system[i].aluno=-4;
-                        }
-                        }
-                        else if (vasr_system[i].aluno==-1 && strcmp(vasr_system[i].nome,busca)==0){
-                           printf("\n\n Aluno com pedências. Procure coordenador do seu curso");
-                           printf("\n\n------------------------------------------------");
-                        }
-        }
+                            }
+                            
+            }
+                        
+
                 break;
             case 3:
                 system("cls");
@@ -226,16 +232,18 @@ void cadastrarAluno(){
                 fflush(stdin);
                 fgets(busca,sizeof(busca),stdin);
                 for (i=0;i<NUM_ALUNO;++i){
-                    if ((strcmp(vasr_system[i].nome,busca)==0) && vasr_system[i].aluno==4){
-                    printf("Parabéns! Você pode gerar seu certificado.");
-                    printf("\n\n------------------------------------------------");
-                    vasr_system[i].aluno=0;
+                    if ((strcmp(vasr_system[i].nome,busca)==0) ){
+                        printf("Parabéns! Você pode gerar seu certificado.");
+                        printf("\n\n------------------------------------------------");
+                        vasr_system[i].aluno=0;
+                    }
+                   /* else if (vasr_system[i].id == NULL){
+                        printf("Você não compareceu a cerimonia marcada e se encontra na lista com seu coordenador.");
+                        printf("O seu Coordenador vai cadastrar novamente o aluno quando outra cerimônia marcada for compátivel com sua ID. Será necessário que o aluno confirme sua presença.");
+                    } */
                 }
-                else if (strcmp(vasr_system[i].nome,busca)==0 && vasr_system[i].aluno==-4){
-                    printf("Você não compareceu a cerimonia marcada e se encontra na lista com seu coordenador.");
-                    printf("O seu Coordenador vai cadastrar novamente o aluno quando outra cerimônia marcada for compátivel com sua ID. Será necessário que o aluno confirme sua presença.");
-                }
-        }
+                
+               
                 break;
             case 4:
                 system("cls");
@@ -621,7 +629,7 @@ void Cerimonialista(){
             system("cls");
             printf("***** Confirmar presença de aluno *****");
                 for (i=0; i < NUM_ALUNO ;++i){
-                    if (vasr_system[i].aluno == 3){
+                    if (vasr_system[i].aluno != NULL){
                         Dados();
                         printf("\nDigite [s/n] para confirmar a presença do aluno: ");
                         fflush(stdin);
@@ -647,7 +655,7 @@ void Cerimonialista(){
         for (i=0;i<3;++i){
             if (cerimonia[i].verificacaoC==1 && cerimonia[i].tipodecerimonia==escolha){
                 cerimonia_cerimonialista(escolha);
-                printf("Essa cerimônia já ocorreu?\ns-sim\nn-não\nDigite: ");
+                printf("\nEssa cerimônia já ocorreu?\ns-sim\nn-não\nDigite: ");
                 fflush(stdin);
                 fgets(finalizar,sizeof(finalizar),stdin);
                 if (strcmp(finalizar,"s")==0){
