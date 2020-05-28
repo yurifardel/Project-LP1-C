@@ -93,6 +93,7 @@ void home(){
             break;
             default:
                 printf("\n B Y E");
+                break;
             break;
         }
     }while(opcao <= 5);
@@ -236,12 +237,15 @@ void cadastrarAluno(){
                         printf("Parabéns! Você pode gerar seu certificado.");
                         printf("\n\n------------------------------------------------");
                         vasr_system[i].aluno=0;
+                        break;
                     }
-                   /* else if (vasr_system[i].id == NULL){
+                    else{
                         printf("Você não compareceu a cerimonia marcada e se encontra na lista com seu coordenador.");
                         printf("O seu Coordenador vai cadastrar novamente o aluno quando outra cerimônia marcada for compátivel com sua ID. Será necessário que o aluno confirme sua presença.");
-                    } */
-                }
+                        break;
+                    }
+                } 
+                
                 
                
                 break;
